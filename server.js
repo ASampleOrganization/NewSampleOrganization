@@ -45,7 +45,7 @@ app.post('/api/login', (req, res, next) => {
   if (req.headers.password === process.env.PASSWORD) {
     // password is correct, set cookie
     console.log('correct password');
-    res.cookie('__session', process.env.PASSWORD, { maxAge: 86400000 }); // cookie expires after 1 day
+    res.cookie('__session', process.env.PASSWORD, { maxAge: 86400000, secure: process.env.NODE_ENV !== 'development' }); // cookie expires after 1 day
     res.status(200).send('correct password');
   } else {
     // password is incorrect
