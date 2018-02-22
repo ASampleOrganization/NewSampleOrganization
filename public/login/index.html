@@ -41,7 +41,7 @@
     
     
     <a class="site-title" href="/">Sample Site</a>
-  
+
     
       <nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
@@ -62,21 +62,7 @@
           
             
             
-              
               <a class="page-link" href="/about/">About</a>
-              
-            
-          
-            
-            
-              
-            
-          
-            
-            
-              
-              <a class="page-link" href="/login/">Login</a>
-              
             
           
             
@@ -84,16 +70,18 @@
           
             
             
-              
+          
+            
+            
+          
+            
+            
               <a class="page-link" href="/page/">Page</a>
-              
             
           
             
             
-              
               <a class="page-link" href="/posts/">Posts</a>
-              
             
           
             
@@ -115,13 +103,32 @@
   </header>
 
   <div class="post-content">
-    <p>Login Page</p>
-
-<form action="/api/login" method="post">
+    <div>
   <label>Password:</label>
-  <input type="text" name="password" />
-  <input type="submit" value="Submit" />
-</form>
+  <input id="password-input" type="text" name="password" />
+  <button onclick="login()">Log In</button>
+</div>
+
+<script>
+
+function login() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      if (this.status == 200) {
+        console.log('successful login');
+        window.location.href = '/';
+      } else {
+        console.log('error logging in');
+      }
+    }
+  };
+  xhttp.open("POST", "/api/login", true);
+  xhttp.setRequestHeader("password", document.getElementById('password-input').value);
+  xhttp.send();
+}
+
+</script>
 
 <!-- <script>
 
